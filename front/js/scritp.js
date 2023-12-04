@@ -65,7 +65,7 @@ async function actualizarVista() {
 }
 
 function cargarSemestresDesdeAPI() {
-    fetch('https://n22twm-3000.csb.app/api', {
+    fetch('http://localhost:3000/api', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ function cargarSemestresDesdeAPI() {
 
 function guardarSemestreEnServidor(nombre, descripcion, anno, inicio, final, color) {
     
-    fetch('https://n22twm-3000.csb.app/api', {
+    fetch(' ', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ function eliminarElemento(indice) {
     // Agrega un evento al botón de aceptar
     document.getElementById("btnAceptar").addEventListener("click", function () {
         //Lo eleminamos del servidor
-        fetch('https://n22twm-3000.csb.app/api', {
+        fetch('http://localhost:3000/api', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

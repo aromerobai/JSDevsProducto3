@@ -387,7 +387,7 @@ function deleteCard(element){
 
 function guardarSubjectEnServidor(nombre, descripcion, dificultad, idSemestre, estado) {
   return new Promise((resolve, reject) => {
-    fetch('https://n22twm-3000.csb.app/api', {
+    fetch('http://localhost:3000/api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -440,7 +440,7 @@ function guardarSubjectEnServidor(nombre, descripcion, dificultad, idSemestre, e
 
 async function getAllSubjects() {
     try {
-        const response = await fetch('https://n22twm-3000.csb.app/api', {
+        const response = await fetch('http://localhost:3000/api', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -484,7 +484,7 @@ async function getAllSubjects() {
 }
 
 const updateSubjectStateMutation = async (id, newState) => {
-    const graphqlUrl = 'https://n22twm-3000.csb.app/api'; // La URL de tu API GraphQL
+    const graphqlUrl = 'http://localhost:3000/api'; // La URL de tu API GraphQL
     
     const requestBody = {
       query: `
@@ -524,7 +524,7 @@ const updateSubjectStateMutation = async (id, newState) => {
 
   function eliminarAsignaturaEnServidor(id) {
     return new Promise((resolve, reject) => {
-      fetch('https://n22twm-3000.csb.app/api', {
+      fetch('http://localhost:3000/api', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
