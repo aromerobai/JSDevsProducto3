@@ -13,6 +13,21 @@
     <script>
         var parametrosURL = obtenerParametrosDeURL();
     </script>
+    <!-- apalac socket -->
+    <!-- Incluye el script de Socket.IO -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+
+<script>
+  // Conecta con el servidor a través de Socket.IO
+  const socket = io();
+
+  // Escucha el evento 'archivoSubido' y muestra el mensaje
+  socket.on('archivoSubido', (mensaje) => {
+    alert(mensaje);
+  });
+</script>
+    <!-- apalac socket -->
+
 </head>
 
 <!--Barra de Navegación-->

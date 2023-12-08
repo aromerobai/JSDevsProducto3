@@ -1,0 +1,4 @@
+-clonar la aplicación
+-npm install  "crea todo lo necesario en node_modules
+-npm run dev  "levanta el servidor y conecta con MongoDB y sirve al front
+

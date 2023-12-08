@@ -12,6 +12,14 @@ const app = express();
 
 //apalac
 const multer = require("multer");
+
+//socket
+const http = require("http");
+const socketIO = require("socket.io");
+
+const server = http.createServer(app);
+const io = socketIO(server);
+
 // Configuración de Multer para almacenar archivos en un directorio específico
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -29,10 +37,18 @@ app.post("/subir-archivo", upload.single("fileInput"), (req, res) => {
   console.log(req.file);
 
   // Realiza cualquier lógica adicional necesaria
+  // Después de que el archivo se haya subido exitosamente
+  io.emit("archivoSubido", "Archivo subido exitosamente");
   res.send("Archivo subido exitosamente");
 });
-//apalac
 
+// Configurar Socket.IO para manejar conexiones
+io.on("connection", (socket) => {
+  console.log("Un cliente se ha conectado");
+  // Puedes manejar eventos adicionales aquí si es necesario
+});
+
+//apalac
 
 connectDb();
 
