@@ -591,8 +591,7 @@ function eliminarAsignaturaEnServidor(id) {
 //Ini apalac
 function uploadFile() {
   
-     // Mostrar un mensaje de éxito
-   showMessage('Archivo subido con éxito', 'success');
+
    
   // Obtener el elemento de entrada de archivo
   const fileInput = document.getElementById('fileInput');
@@ -600,6 +599,9 @@ function uploadFile() {
   // Verificar si se seleccionó un archivo
   if (fileInput.files.length > 0) {
       const file = fileInput.files[0];
+
+     // Mostrar un mensaje de éxito
+       showMessage('Archivo subido con éxito', 'success');
 
       // Crear un objeto FormData para enviar el archivo al servidor
       const formData = new FormData();

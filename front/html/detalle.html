@@ -65,17 +65,24 @@
           </div>
           <div class="modal-body">
               <!-- Contenido del modal -->
-              <form id="fileUploadForm" enctype="multipart/form-data">
+
+              <form action="/subir-archivo" method="post" enctype="multipart/form-data">
+                <input type="file" name="fileInput">
+                <button type="submit">Subir Archivo</button>
+            </form>
+
+          <!---   <form id="fileUploadForm" enctype="multipart/form-data">
                   <div class="mb-3">
                       <label for="fileInput" class="form-label">Seleccionar Fichero</label>
                       <input type="file" class="form-control" id="fileInput" name="fileInput">
+                </form> --> 
                   </div>
               </form>
           </div>
-          <div class="modal-footer">
+       <!---    <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
               <button type="button" class="btn btn-primary" onclick="uploadFile()">Subir Fichero</button>
-          </div>
+          </div>  --> 
       </div>
   </div>
 </div>
