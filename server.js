@@ -47,7 +47,6 @@ io.on("connection", (socket) => {
   console.log("Un cliente se ha conectado");
   // Puedes manejar eventos adicionales aquí si es necesario
 });
-
 //apalac
 
 connectDb();
