@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function cargarSemestresDesdeAPI() {
     try {
-        const response = await fetch('http://localhost:3000/api', {
+        const response = await fetch('https://n22twm-3000.csb.app/api', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -13,6 +13,20 @@
     <script>
         var parametrosURL = obtenerParametrosDeURL();
     </script>
+    <!-- apalac socket -->
+    <!-- Incluye el script de Socket.IO -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+
+<script>
+  // Conecta con el servidor a través de Socket.IO
+  const socket = io();
+
+  // Escucha el evento 'archivoSubido' y muestra el mensaje
+  socket.on('archivoSubido', (mensaje) => {
+    alert(mensaje);
+  });
+</script>
+    <!-- apalac socket -->
 </head>
 
 <!--Barra de Navegación-->
@@ -54,6 +68,42 @@
         </div>
     </div>
 </div>
+<!--Ini apalac Modal adjuntar fichero -->
+<!-- Modal de Adjuntar Fichero -->
+<div class="modal fade" id="AttachFileModal" tabindex="-1" aria-labelledby="AttachFileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="AttachFileModalLabel">Adjuntar Fichero</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <!-- Contenido del modal -->
+
+              <form action="/subir-archivo" method="post" enctype="multipart/form-data">
+                <input type="file" name="fileInput">
+                <button type="submit">Subir Archivo</button>
+            </form>
+
+          <!---   <form id="fileUploadForm" enctype="multipart/form-data">
+                  <div class="mb-3">
+                      <label for="fileInput" class="form-label">Seleccionar Fichero</label>
+                      <input type="file" class="form-control" id="fileInput" name="fileInput">
+                </form> --> 
+                  </div>
+              </form>
+          </div>
+       <!---    <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" onclick="uploadFile()">Subir Fichero</button>
+          </div>  --> 
+      </div>
+  </div>
+</div>
+<!-- Agrega este elemento donde desees mostrar mensajes -->
+<div id="messageContainer"></div>
+<!--Fin apalac Modal adjuntar fichero-->
+
 <div class="encabezado" id="encabezado">
     <!--Encabezado añadido desde javascript-->
 </div>
