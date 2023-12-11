@@ -15,16 +15,50 @@
     </script>
     <!-- apalac socket -->
     <!-- Incluye el script de Socket.IO -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
 
-<script>
-  // Conecta con el servidor a través de Socket.IO
-  const socket = io();
-  // Escucha el evento 'archivoSubido' y muestra el mensaje
-  socket.on('archivoSubido', (mensaje) => {
-    alert(mensaje);
-  });
-</script>
+    <script>
+      // Este código se ejecutará después de que el DOM esté completamente cargado
+      document.addEventListener('DOMContentLoaded', function() {
+          // Inicializa la conexión con Socket.IO
+        const socket = io();
+
+        // Escucha el evento 'archivoSubido' y muestra una alerta con el mensaje
+        socket.on('archivoSubido', (mensaje) => {
+          alert(mensaje);
+          // Cerrar el modal después de mostrar la alerta
+          var modal = bootstrap.Modal.getInstance(document.getElementById('AttachFileModal'));
+          modal.hide();
+        });
+
+        // Ahora es seguro buscar elementos del DOM
+        const form = document.getElementById('formArchivo');
+        if (form) {
+          form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Previene el comportamiento por defecto del formulario
+    
+            const formData = new FormData(this); // Crea un FormData con los datos del formulario
+    
+            // Envía el archivo usando Fetch API
+            fetch('/subir-archivo', {
+              method: 'POST',
+              body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+              console.log(data); // Aquí puedes manejar la respuesta del servidor
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+          });
+        } else {
+          console.error('Formulario no encontrado');
+        }
+      });
+    </script>
+    
+    
 </head>
 <!--Barra de Navegación-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
@@ -75,25 +109,13 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <!-- Contenido del modal -->
-
-              <form action="/subir-archivo" method="post" enctype="multipart/form-data">
+              <form id="formArchivo" action="/subir-archivo" method="post" enctype="multipart/form-data">
                 <input type="file" name="fileInput">
                 <button type="submit">Subir Archivo</button>
-            </form>
-
-          <!---   <form id="fileUploadForm" enctype="multipart/form-data">
-                  <div class="mb-3">
-                      <label for="fileInput" class="form-label">Seleccionar Fichero</label>
-                      <input type="file" class="form-control" id="fileInput" name="fileInput">
-                </form> --> 
-                  </div>
               </form>
+            </div>
+            </form>
           </div>
-       <!---    <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" onclick="uploadFile()">Subir Fichero</button>
-          </div>  --> 
       </div>
   </div>
 </div>

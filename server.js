@@ -31,6 +31,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
+
 // Ruta para manejar la subida de archivos
 app.post("/subir-archivo", upload.single("fileInput"), (req, res) => {
   // Aquí puedes acceder a la información del archivo subido a través de req.file
@@ -38,16 +39,15 @@ app.post("/subir-archivo", upload.single("fileInput"), (req, res) => {
 
   // Realiza cualquier lógica adicional necesaria
   // Después de que el archivo se haya subido exitosamente
-  io.emit("archivoSubido", "Archivo subido exitosamente");
-  res.send("Archivo subido exitosamente");
+  io.emit("archivoSubido", "Archivo subido exitosamente desde socket.io");
+  res.send("Archivo subido exitosamente desde socket.io");
 });
 
 // Configurar Socket.IO para manejar conexiones
 io.on("connection", (socket) => {
   console.log("Un cliente se ha conectado");
-  // Puedes manejar eventos adicionales aquí si es necesario
 });
-//apalac
+
 
 connectDb();
 
