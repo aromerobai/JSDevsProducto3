@@ -300,13 +300,28 @@ function createCard() {
       const del_button_txt = document.createTextNode("Eliminar");
       del_button.appendChild(del_button_txt);
 
+      const attach_button = document.createElement("btn");
+      attach_button.setAttribute("type", "button");
+      attach_button.classList.add("btn");
+      attach_button.classList.add("btn-primary");
+      attach_button.classList.add("btn-sm");
+      attach_button.classList.add("btn-attach");
+      attach_button.setAttribute("data-bs-toggle", "modal");
+      attach_button.setAttribute("data-bs-target", "#AttachFileModal");
+      attach_button.setAttribute("onclick", "attachFile(this)");
+    
+      const attach_button_txt = document.createTextNode("Adjuntar Fichero");
+      attach_button.appendChild(attach_button_txt);
+
       card_body.appendChild(h5);
       card_body.appendChild(p_desc);
       card_body.appendChild(p_difficulty);
       card_body.appendChild(hiddenInput);
       card_body.appendChild(upd_button);
       card_body.appendChild(del_button);
-
+      
+      card_body.appendChild(attach_button);
+      
       col_div.appendChild(card_body);
       row_div.appendChild(col_div);
       card_div.appendChild(row_div);
