@@ -73,7 +73,7 @@ async function start() {
   });
 
   //Escucha en el puerto 3000node
-  app.listen(process.env.PORT || 3000, () =>
+  server.listen(process.env.PORT || 3000, () =>
     console.log("Server on port", process.env.PORT || 3000)
   );
 }
