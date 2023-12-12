@@ -60,7 +60,7 @@ const resolvers = {
       },
       async deleteSemestre(_, { id } , { io }) {
           await Semestre.findByIdAndDelete(id);
-          io.emit('semestreEliminado', { status: "ok", message: "Se ha eliminado un Semestre" });
+          io.emit('semestreEliminadoGeneral', { status: "ok", message: "Se ha eliminado un Semestre" });
           return "Task Deleted";
         },
       async deleteSemestreByIndex(_, { index }, { io }) {

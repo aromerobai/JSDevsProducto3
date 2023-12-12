@@ -648,4 +648,43 @@ function showMessage(message, messageType) {
   const messageContainer = document.getElementById('messageContainer');
   messageContainer.innerHTML = `<div class="alert alert-${messageType}" role="alert">${message}</div>`;
 }
-//end apalac
+
+var socket = io.connect('http://localhost:3000'); // Conectarse al servidor Socket.IO
+
+socket.on('subjectCreada', function(data) {
+  if (data.status === "ok") {
+      // Configura el mensaje en el modal
+      document.getElementById('customAlertMessage').textContent = data.message;
+
+      // Muestra el modal
+      var customAlertModal = new bootstrap.Modal(document.getElementById('customAlertModal'));
+      customAlertModal.show();
+
+      // Agrega un controlador de eventos al botón "OK"
+      document.getElementById('customAlertOkButton').onclick = function() {
+          customAlertModal.hide();
+          window.location.reload();
+      };
+  } else {
+      console.error("Error al crear el semestre:", data.message);
+  }
+});
+
+socket.on('subjectEliminada', function(data) {
+  if (data.status === "ok") {
+      // Configura el mensaje en el modal
+      document.getElementById('customAlertMessage').textContent = data.message;
+
+      // Muestra el modal
+      var customAlertModal = new bootstrap.Modal(document.getElementById('customAlertModal'));
+      customAlertModal.show();
+
+      // Agrega un controlador de eventos al botón "OK"
+      document.getElementById('customAlertOkButton').onclick = function() {
+          customAlertModal.hide();
+          window.location.reload();
+      };
+  } else {
+      console.error("Error al crear el semestre:", data.message);
+  }
+});

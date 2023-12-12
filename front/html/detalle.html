@@ -16,7 +16,7 @@
     <!-- apalac socket -->
     <!-- Incluye el script de Socket.IO -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
-     
+
 </head>
 <!--Barra de Navegación-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
@@ -155,6 +155,22 @@
           </div>         
       </div>      
     </div>      
+    <div class="modal fade" id="customAlertModal" tabindex="-1" aria-labelledby="customAlertModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="customAlertModalLabel">Mensaje</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="customAlertMessage">
+            <!-- El mensaje se insertará aquí -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="customAlertOkButton">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>  
 <script src="../js/asignaturas.js"></script>
 </body>
