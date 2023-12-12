@@ -605,9 +605,6 @@ function eliminarAsignaturaEnServidor(id) {
 
 //Ini apalac
 function uploadFile() {
-  
-
-   
   // Obtener el elemento de entrada de archivo
   const fileInput = document.getElementById('fileInput');
 

@@ -55,6 +55,45 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 });
 
+// Este código se ejecutará después de que el DOM esté completamente cargado
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializa la conexión con Socket.IO
+    const socket = io();
+
+    // Escucha el evento 'archivoSubido' y muestra una alerta con el mensaje
+    socket.on('archivoSubido', (mensaje) => {
+    alert(mensaje);
+    // Cerrar el modal después de mostrar la alerta
+    var modal = bootstrap.Modal.getInstance(document.getElementById('AttachFileModal'));
+    modal.hide();
+    });
+
+    // Ahora es seguro buscar elementos del DOM
+    const form = document.getElementById('formArchivo');
+    if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Previene el comportamiento por defecto del formulario
+
+        const formData = new FormData(this); // Crea un FormData con los datos del formulario
+
+        // Envía el archivo usando Fetch API
+        fetch('/subir-archivo', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data); // Aquí puedes manejar la respuesta del servidor
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    } else {
+        console.error('Formulario no encontrado');
+    }
+});
+
 async function cargarSemestresDesdeAPI() {
     try {
         const response = await fetch('http://localhost:3000/api', {

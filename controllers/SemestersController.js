@@ -51,22 +51,25 @@ const resolvers = {
     },
     
     Mutation: {
-      async createSemestre(parent, { SemestreInput }, context, info) {
+      async createSemestre(parent, { SemestreInput }, { io }, context, info) {
         const { nombre, descripcion, anno, inicio, final, color } = SemestreInput; 
         const newSemestre = new Semestre({ nombre, descripcion, anno, inicio, final, color });
         await newSemestre.save();
+        io.emit('semestreCreado', newSemestre);
         return newSemestre;
       },
-      async deleteSemestre(_, { id }) {
+      async deleteSemestre(_, { id } , { io }) {
           await Semestre.findByIdAndDelete(id);
+          io.emit('semestreEliminado', id);
           return "Task Deleted";
         },
-      async deleteSemestreByIndex(_, { index }) {
+      async deleteSemestreByIndex(_, { index }, { io }) {
           const semestreToDelete = await Semestre.findOne().skip(index).exec();
           if (!semestreToDelete) {
               throw new Error("Semestre not found");
           }
           await Semestre.deleteOne({ _id: semestreToDelete._id });
+          io.emit('semestreEliminado', index);
           return "Semestre Deleted";
       },
     },

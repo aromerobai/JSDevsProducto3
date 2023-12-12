@@ -63,6 +63,7 @@ async function start() {
   const apolloServer = new ApolloServer({
     typeDefs: [typeDefs, SubjecttypeDefs],
     resolvers: [resolvers, Subjectresolvers],
+    context: ({ req }) => ({ io }),
   });
 
   await apolloServer.start();

@@ -151,7 +151,6 @@ function guardarSemestreEnServidor(nombre, descripcion, anno, inicio, final, col
         if (data && data.errors) {
             console.error('Error en la respuesta GraphQL:', data.errors);
         } else {
-            console.log("Semestre creado:", data.data.createSemestre);
             cargarSemestresDesdeAPI();
         }
     })
@@ -179,7 +178,6 @@ function eliminarElemento(indice) {
     document.getElementById("btnCancelar").addEventListener("click", function () {
         document.body.removeChild(alertDiv); // Cierra la alerta
     });
-    console.log(indice);
     // Agrega un evento al botón de aceptar
     document.getElementById("btnAceptar").addEventListener("click", function () {
         //Lo eleminamos del servidor
@@ -204,9 +202,7 @@ function eliminarElemento(indice) {
             if (data && data.errors) {
                 console.error('Error en la respuesta GraphQL:', data.errors);
             } else {
-                console.log(indice);
                 cargarSemestresDesdeAPI();
-                console.log("Semestre eleiminado:", data.data.createSemestre);
             }
         })
         .catch(error => {
@@ -216,3 +212,15 @@ function eliminarElemento(indice) {
         document.body.removeChild(alertDiv);
     });
 }
+
+var socket = io.connect('http://localhost:3000'); // Conectarse al servidor Socket.IO
+
+socket.on('semestreCreado', function(semestre) {
+    console.log('Semestre creado: (socket.io)', semestre);
+    cargarSemestresDesdeAPI(); // Actualizar la lista de semestres
+});
+
+socket.on('semestreEliminado', function(id) {
+    console.log('Semestre eliminado: (socket.io)', id);
+    cargarSemestresDesdeAPI(); // Actualizar la lista de semestres
+});
