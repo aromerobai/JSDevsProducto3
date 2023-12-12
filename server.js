@@ -39,7 +39,7 @@ app.post("/subir-archivo", upload.single("fileInput"), (req, res) => {
 
   // Realiza cualquier lógica adicional necesaria
   // Después de que el archivo se haya subido exitosamente
-  io.emit("archivoSubido", "Archivo subido exitosamente (socket.io)");
+  io.emit("archivoSubido", "Se ha subido un archivo exitosamente");
   res.send("Archivo subido exitosamente (socket.io)");
 });
 

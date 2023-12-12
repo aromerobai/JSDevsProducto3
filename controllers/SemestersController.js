@@ -55,12 +55,12 @@ const resolvers = {
         const { nombre, descripcion, anno, inicio, final, color } = SemestreInput; 
         const newSemestre = new Semestre({ nombre, descripcion, anno, inicio, final, color });
         await newSemestre.save();
-        io.emit('semestreCreado', newSemestre);
+        io.emit('semestreCreado', { status: "ok", message: "Se ha creado un Semestre" });
         return newSemestre;
       },
       async deleteSemestre(_, { id } , { io }) {
           await Semestre.findByIdAndDelete(id);
-          io.emit('semestreEliminado', id);
+          io.emit('semestreEliminado', { status: "ok", message: "Se ha eliminado un Semestre" });
           return "Task Deleted";
         },
       async deleteSemestreByIndex(_, { index }, { io }) {
@@ -69,7 +69,7 @@ const resolvers = {
               throw new Error("Semestre not found");
           }
           await Semestre.deleteOne({ _id: semestreToDelete._id });
-          io.emit('semestreEliminado', index);
+          io.emit('semestreEliminado', { status: "ok", message: "Se ha eliminado un Semestre" });
           return "Semestre Deleted";
       },
     },

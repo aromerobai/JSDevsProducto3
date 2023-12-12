@@ -215,12 +215,22 @@ function eliminarElemento(indice) {
 
 var socket = io.connect('http://localhost:3000'); // Conectarse al servidor Socket.IO
 
-socket.on('semestreCreado', function(semestre) {
-    console.log('Semestre creado: (socket.io)', semestre);
-    cargarSemestresDesdeAPI(); // Actualizar la lista de semestres
+socket.on('semestreCreado', function(data) {
+    if (data.status === "ok") {
+        console.log(data.message); // Muestra el mensaje de confirmación
+        alert(data.message);
+        cargarSemestresDesdeAPI(); // Actualizar la lista de semestres
+    } else {
+        console.error("Error al crear el semestre:", data.message);
+    }
 });
 
-socket.on('semestreEliminado', function(id) {
-    console.log('Semestre eliminado: (socket.io)', id);
-    cargarSemestresDesdeAPI(); // Actualizar la lista de semestres
+socket.on('semestreEliminado', function(data) {
+    if (data.status === "ok") {
+        console.log(data.message); // Muestra el mensaje de confirmación
+        alert(data.message);
+        cargarSemestresDesdeAPI(); // Actualizar la lista de semestres
+    } else {
+        console.error("Error al eliminar el semestre:", data.message);
+    }
 });
