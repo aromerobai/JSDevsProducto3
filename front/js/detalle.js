@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 <div class="text-center">
                     <h1>${ListaSemestres[indice].nombre}</h1>
                     <button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Detalles del Semestre</button>
-                    <button type="button" class="btn btn-primary" onclick="modalAddCard()" data-bs-toggle="modal" data-bs-target="#AddUpdCard">Añadir Asignatura</button>
                 </div>
             </div>
         `;

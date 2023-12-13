@@ -90,17 +90,22 @@
           <div id="asignaturas-pannel" class="col overflow-auto pannel" ondrop="drop(event)" ondragover="allowDrop(event)">  
             <div class="col-title">
               <h2>Empezada
+                <button type="button" class="btn btn-primary" onclick="modalAddCard('asignaturas-pannel')" data-bs-toggle="modal" data-bs-target="#AddUpdCard">+</button>
               </h2>                    
             </div>                                                         
           </div>              
           <div id="aprobada-pannel" class="col overflow-auto pannel" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="col-title">
-              <h2>Aprobada</h2>                                                  
+              <h2>Aprobada
+                <button type="button" class="btn btn-primary" onclick="modalAddCard('aprobada-pannel')" data-bs-toggle="modal" data-bs-target="#AddUpdCard">+</button>
+              </h2>                                                  
             </div>                              
           </div>              
           <div id="suspendida-pannel" class="col overflow-auto pannel" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="col-title">
-              <h2>Suspendida</h2>
+              <h2>Suspendida
+                <button type="button" class="btn btn-primary" onclick="modalAddCard('suspendida-pannel')" data-bs-toggle="modal" data-bs-target="#AddUpdCard">+</button>
+              </h2>
             </div>                
           </div>              
         </div>                                   
@@ -130,7 +135,8 @@
                     <option value="intermedio">Intermedio</option>
                     <option value="dificil">Difícil</option>
                 </select>
-            </div>
+              </div>
+              <input type="hidden" id="panelIdField" value="">
               <button id="add-card" type="button" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
               <button id="update-card" type="button" class="btn btn-primary" data-bs-dismiss="modal">Modificar</button>
             </form>

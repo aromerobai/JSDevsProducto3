@@ -72,8 +72,9 @@ function yourFunctionToHandleDrop(draggedElement, panel) {
     const h2Element = colTitle.querySelector("h2");
     if (h2Element) {
       estado_asignatura = h2Element.textContent;
-      estado_asignatura = estado_asignatura.replace(/\s/g, "");
-      console.log("Contenido del h2:", estado_asignatura);
+      console.log("Contenido del h2 Primero:", estado_asignatura);
+      estado_asignatura = estado_asignatura.replace(/\+/g, "").trim();
+      console.log("Contenido del h2 Segundo:", estado_asignatura);
     } else {
       console.log("No se encontró el elemento h2 dentro de col-title.");
     }
@@ -99,6 +100,8 @@ function createCardConDatos(id, nombre, descripcion, dificultad, estado) {
   const card_div = document.createElement("div");
   var res = id_div.concat(String(i));
   card_div.setAttribute("id", res);
+
+  console.log("Estado:", estado);
 
   card_div.classList.add("card");
   card_div.classList.add("mb-3");
@@ -217,18 +220,31 @@ function createCardConDatos(id, nombre, descripcion, dificultad, estado) {
     suspendida_pannel.appendChild(card_div);
   }
 }
+
 function createCard() {
   const title_val = document.getElementById("title").value;
   const desc_val = document.getElementById("description").value;
   const difficulty_val = document.getElementById("difficulty").value;
   var difficulty_txt = document.createTextNode("Dificultad: " + difficulty_val);
 
+  const panelId = document.getElementById("panelIdField").value;
+  const panel = document.getElementById(panelId);
+
   var id_asignatura_creada = "";
 
-  guardarSubjectEnServidor(title_val, desc_val, difficulty_val, id, "Empezada")
+  var panelDondeSeCrea = "";
+
+  if (panelId == "asignaturas-pannel") {
+    panelDondeSeCrea = "Empezada";
+  } else if (panelId == "aprobada-pannel") {
+    panelDondeSeCrea = "Aprobada";
+  } else if (panelId == "suspendida-pannel") {
+    panelDondeSeCrea = "Suspendida";
+  }
+
+  guardarSubjectEnServidor(title_val, desc_val, difficulty_val, id, panelDondeSeCrea)
     .then((id_asignatura_creada) => {
       /*Divs*/
-      console.log("Entra en crear asignatura: " + id_asignatura_creada);
       const card_div = document.createElement("div");
       var res = id_div.concat(String(i));
       card_div.setAttribute("id", res);
@@ -326,7 +342,8 @@ function createCard() {
       row_div.appendChild(col_div);
       card_div.appendChild(row_div);
 
-      asignaturas_pannel.appendChild(card_div);
+      //asignaturas_pannel.appendChild(card_div);
+      panel.appendChild(card_div);
 
       clearLabels();
       i += 1;
@@ -344,17 +361,19 @@ function clearLabels() {
 
 const delete_btns = document.querySelectorAll(".btn-delete");
 
-function modalAddCard() {
+function modalAddCard(panelId) {
   clearLabels();
   changeModalTitle(document.getElementById("modalTitle"), "Agregar");
   add_button.style.display = "block";
   upd_button.style.display = "none";
+
+  // Guarda el panelId en un campo oculto
+  document.getElementById("panelIdField").value = panelId;
 }
 
 function modalUpdateCard(element) {
   changeModalTitle(document.getElementById("modalTitle"), "Modificar");
   const card_body = element.parentElement;
-  console.log(card_body);
   const title = card_body.children[0];
   const description = card_body.children[1];
   const difficulty = card_body.children[2];
